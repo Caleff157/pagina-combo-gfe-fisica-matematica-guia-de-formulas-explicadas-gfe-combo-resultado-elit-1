@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combo GFE - Guia de Fórmulas Explicadas | Física + Matemática</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #B34760;
+            --color-primary-dark: #8C3049;
+            --color-accent: #B34760;
+            --color-bg: #FFFFFF;
+            --color-surface: #FBF1F3;
+            --color-text: #2B171B;
+            --color-text-muted: #6E525A;
+            --radius: 16px;
+            --shadow-sm: 0 2px 8px rgba(43, 23, 27, 0.04);
+            --shadow-md: 0 4px 24px rgba(43, 23, 27, 0.06);
+            --font-display: "DM Serif Display", serif;
+            --font-body: "Nunito Sans", sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--color-bg);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            line-height: 1.2;
+            font-weight: 400;
+        }
+
+        h1 {
+            font-size: clamp(2.25rem, 5vw, 3.75rem);
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 2rem;
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 3rem 0;
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 48px;
+            font-size: 1.125rem;
+            font-weight: 700;
+            font-family: var(--font-body);
+            text-decoration: none;
+            border-radius: var(--radius);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: white;
+            box-shadow: 0 4px 16px rgba(179, 71, 96, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(179, 71, 96, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-surface);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--color-surface) 0%, #FFFFFF 100%);
+            padding: 6rem 0 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(179, 71, 96, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-headline {
+            color: var(--color-text);
+        }
+
+        .hero-subheadline {
+            font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+            color: var(--color-text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .hero-authority {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2.5rem;
+            font-style: italic;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 640px) {
+            .hero-cta {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+            }
+        }
+
+        .section-alt {
+            background: var(--color-surface);
+        }
+
+        .pain-section {
+            text-align: center;
+        }
+
+        .pain-list {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .pain-item {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .pain-item::before {
+            content: "❌ ";
+            margin-right: 0.5rem;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--color-bg);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            color: var(--color-primary);
+        }
+
+        .card ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .card li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+        }
+
+        .card li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: bold;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-card {
+            background: var(--color-bg);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            transition: all 0.2s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(43, 23, 27, 0.1);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .benefit-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--color-text);
+        }
+
+        .benefit-text {
+            color: var(--color-text-muted);
+        }
+
+        .stack-section {
+            text-align: center;
+        }
+
+        .stack-container {
+            max-width: 700px;
+            margin: 3rem auto 0;
+        }
+
+        .stack-item {
+            background: var(--color-bg);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 1.5rem;
+            text-align: left;
+            position: relative;
+            padding-left: 5rem;
+        }
+
+        .stack-number {
+            position: absolute;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            opacity: 0.3;
+        }
+
+        .stack-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+        }
+
+        .stack-description {
+            color: var(--color-text-muted);
+        }
+
+        .objections-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .objection-card {
+            background: var(--color-bg);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        .objection-question {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+
+        .objection-answer {
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+
+        .guarantee-section {
+            text-align: center;
+            background: var(--color-surface);
+        }
+
+        .guarantee-box {
+            max-width: 600px;
+            margin: 2rem auto 0;
+            background: var(--color-bg);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        .guarantee-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .guarantee-text {
+            font-size: 1.125rem;
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--color-bg);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-question {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 0.75rem;
+        }
+
+        .faq-answer {
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+
+        .cta-final {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-final h2 {
+            color: white;
+        }
+
+        .cta-final-text {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-final .btn-primary {
+            background: white;
+            color: var(--color-primary);
+        }
+
+        .cta-final .btn-primary:hover {
+            background: var(--color-surface);
+            transform: translateY(-2px);
+        }
+
+        .microcopy {
+            font-size: 0.875rem;
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+
+        .mobile-cta-bar {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 -4px 24px rgba(43, 23, 27, 0.15);
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-cta-bar {
+                display: block;
+            }
+        }
+
+        .mobile-cta-bar .btn {
+            width: 100%;
+            padding: 16px 24px;
+        }
+
+        .price-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            display: inline-block;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        .price-label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            font-family: var(--font-body);
+        }
+
+        .price-installment {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-headline">Domine Física e Matemática Entendendo de Onde Vem Cada Fórmula</h1>
+                <p class="hero-subheadline">Pare de decorar. Compreenda os fundamentos e desenvolva domínio real para ENEM, ITA, IME e olimpíadas científicas.</p>
+                <p class="hero-authority">Material de referência físico desenvolvido para quem busca preparação de alto nível</p>
+                <div class="price-box">
+                    <div class="price-label">Investimento</div>
+                    <div class="price-value">R$ 720,48</div>
+                    <div class="price-installment">em até 12x no cartão</div>
+                </div>
+                <div class="hero-cta">
+                    <a href="https://go.hotmart.com/X107609255T?ap=6295" class="btn btn-primary" data-track="cta-principal">Comprar Agora</a>
+                    <a href="https://go.hotmart.com/X107609255T?dp=1" class="btn btn-secondary" data-track="cta-secundario">Quero Conhecer Mais o Produto</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pain-section">
+        <div class="container">
+            <div class="pain-list">
+                <p class="pain-item">Você decora fórmulas mas não entende quando aplicar cada uma na hora da prova</p>
+                <p class="pain-item">Resolve exercícios no automático, mas trava quando a questão muda um pouco o enunciado</p>
+                <p class="pain-item">Sente que está perdendo tempo estudando superficialmente enquanto outros candidatos dominam os fundamentos de verdade</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-alt">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Pra Quem É (e Pra Quem NÃO É) Este Material</h2>
+            <div class="two-col">
+                <div class="card">
+                    <div class="card-icon">✅</div>
+                    <h3>Este combo é pra você se:</h3>
+                    <ul>
+                        <li>Está se preparando para ENEM, vestibulares concorridos (ITA, IME, Medicina) ou olimpíadas científicas</li>
+                        <li>Quer entender a origem de cada fórmula em vez de apenas memorizá-las</li>
+                        <li>Busca material físico de referência em capa dura para consultar sempre que precisar</li>
+                        <li>Valoriza rigor teórico e explicações aprofundadas da base até o nível avançado</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon">❌</div>
+                    <h3>Este combo NÃO é pra você se:</h3>
+                    <ul>
+                        <li>Procura videoaulas ou conteúdo digital — este é um produto físico (livros impressos)</li>
+                        <li>Quer apenas fórmulas prontas e resumos rápidos sem desenvolvimento teórico</li>
+                        <li>Não tem interesse em compreender a matemática e física de forma profunda</li>
+                        <li>Busca material básico para ensino fundamental</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 style="text-align: center;">O Que Você Conquista Com Este Material</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <span class="benefit-icon">🎯</span>
+                    <div class="benefit-title">Compreensão Profunda</div>
+                    <p class="benefit-text">Entenda a lógica por trás de cada fórmula e quando aplicá-la, em vez de depender de memorização frágil</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="benefit-icon">🧠</span>
+                    <div class="benefit-title">Base Sólida</div>
+                    <p class="benefit-text">Construa fundamentos que sustentam qualquer nível de dificuldade — do básico ao ITA/IME</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="benefit-icon">📈</span>
+                    <div class="benefit-title">Preparação Elite</div>
+                    <p class="benefit-text">Material desenvolvido pensando nos vestibulares mais concorridos e olimpíadas científicas</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="benefit-icon">📚</span>
+                    <div class="benefit-title">Referência Permanente</div>
+                    <p class="benefit-text">Livros físicos em capa dura que acompanham você durante toda a preparação, sempre à mão para consulta</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="benefit-icon">🔗</span>
+                    <div class="benefit-title">Da Teoria à Prática</div>
+                    <p class="benefit-text">Conexão clara entre conceitos teóricos e aplicação real nas questões de provas</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="benefit-icon">⚡</span>
+                    <div class="benefit-title">Autonomia no Estudo</div>
+                    <p class="benefit-text">Material completo que permite estudar de forma independente, no seu ritmo, sem depender de terceiros</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-alt stack-section">
+        <div class="container">
+            <h2>O Que Está Incluso no Combo GFE</h2>
+            <p style="max-width: 700px; margin: 0 auto 3rem; color: var(--color-text-muted); font-size: 1.125rem;">Dois volumes físicos em capa dura com explicações detalhadas dos fundamentos de Física e Matemática:</p>
+            <div class="stack-container">
+                <div class="stack-item">
+                    <div class="stack-number">01</div>
+                    <div class="stack-title">Guia de Fórmulas Explicadas — Física</div>
+                    <p class="stack-description">Livro físico em capa dura com todas as fórmulas fundamentais de Física explicadas desde a origem: mecânica, termodinâmica, eletromagnetismo, óptica e física moderna. De onde vem cada expressão e quando aplicá-la.</p>
+                </div>
+                <div class="stack-item">
+                    <div class="stack-number">02</div>
+                    <div class="stack-title">Guia de Fórmulas Explicadas — Matemática</div>
+                    <p class="stack-description">Livro físico em capa dura cobrindo álgebra, geometria, trigonometria, funções, análise combinatória e cálculo. Demonstrações rigorosas e aplicações práticas em problemas de vestibular e olimpíadas.</p>
+                </div>
+                <div class="stack-item">
+                    <div class="stack-number">03</div>
+                    <div class="stack-title">Entrega Nacional</div>
+                    <p class="stack-description">Receba os dois volumes em casa, em qualquer lugar do Brasil, com envio pelos Correios após a confirmação do pagamento.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 1rem;">Quebrando as Objeções Mais Comuns</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 3rem; color: var(--color-text-muted);">Entendemos suas dúvidas. Veja como o Combo GFE resolve as principais preocupações:</p>
+            <div class="objections-grid">
+                <div class="objection-card">
+                    <div class="objection-question">"Não tenho tempo para estudar teoria profunda, preciso de resultados rápidos"</div>
+                    <p class="objection-answer">Compreender a origem das fórmulas economiza tempo no longo prazo: você resolve questões mais rápido porque entende a lógica, em vez de ficar tentando lembrar qual fórmula usar. Este material acelera sua curva de aprendizado justamente por construir base sólida — não é "decoreba lenta", é domínio real que se traduz em performance na prova.</p>
+                </div>
+                <div class="objection-card">
+                    <div class="objection-question">"Já tentei outros materiais e não funcionou, como sei que este vai ser diferente?"</div>
+                    <p class="objection-answer">A maioria dos materiais entrega fórmulas prontas e espera que você decore. O diferencial do GFE é justamente o oposto: cada fórmula é explicada desde a origem, mostrando o raciocínio que a construiu. Se os outros materiais não funcionaram, provavelmente é porque faltou essa camada de compreensão profunda — que é exatamente o que este combo oferece.</p>
+                </div>
+                <div class="objection-card">
+                    <div class="objection-question">"Não sei se meu nível atual é suficiente para aproveitar este material"</div>
+                    <p class="objection-answer">O GFE foi desenvolvido para cobrir desde os fundamentos até o nível ITA/IME/olimpíadas. Se você está começando, o material constrói a base do zero com rigor; se já tem conhecimento intermediário, ele aprofunda e conecta conceitos que antes pareciam soltos. O formato físico permite que você consulte no seu ritmo, quantas vezes precisar, sem pressa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="guarantee-section">
+        <div class="container">
+            <h2>Compra 100% Segura e Protegida</h2>
+            <div class="guarantee-box">
+                <div class="guarantee-icon">🔒</div>
+                <p class="guarantee-text">Sua compra é processada pela Hotmart, a maior plataforma de produtos digitais e físicos da América Latina. Pagamento seguro, dados protegidos e suporte completo durante todo o processo. Compre com tranquilidade.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-alt">
+        <div class="container">
+            <div class="faq-section">
+                <h2 style="text-align: center;">Perguntas Frequentes</h2>
+                <div class="faq-item">
+                    <div class="faq-question">Como recebo o material?</div>
+                    <p class="faq-answer">Este é um produto físico. Após a confirmação do pagamento, os dois livros em capa dura serão enviados para o endereço cadastrado via Correios. O prazo de entrega varia conforme sua região (geralmente entre 7 e 15 dias úteis para a maioria do país).</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Posso parcelar o pagamento?</div>
+                    <p class="faq-answer">Sim! O pagamento pode ser parcelado em até 12x no cartão de crédito, com processamento seguro pela Hotmart. Você também pode pagar via boleto bancário (à vista) ou PIX.</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">O material é atualizado com a nova formatação do ENEM?</div>
+                    <p class="faq-answer">Sim. O conteúdo cobre todos os tópicos de Física e Matemática cobrados no ENEM, vestibulares tradicionais (ITA, IME, Fuvest, Unicamp) e olimpíadas científicas. Como trabalha com fundamentos, o material permanece relevante independentemente de mudanças pontuais no formato das provas.</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Tenho suporte em caso de dúvida sobre o pedido?</div>
+                    <p class="faq-answer">Sim. Após a compra, você tem acesso ao suporte da Hotmart para questões relacionadas a pagamento, envio e rastreamento do pedido. Qualquer dúvida operacional é respondida diretamente pela plataforma.</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Este material substitui um cursinho preparatório?</div>
+                    <p class="faq-answer">O GFE é um material de referência complementar, não um curso completo com aulas e listas de exercícios. Ele serve como guia teórico profundo para você consultar sempre que precisar entender a origem de uma fórmula ou revisar fundamentos. Funciona muito bem combinado com cursinhos, videoaulas ou estudo independente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-final">
+        <div class="container">
+            <h2>Comece Sua Preparação de Alto Nível Hoje</h2>
+            <p class="cta-final-text">Receba os dois volumes do Combo GFE em casa e construa a base sólida que separa aprovação de tentativa.</p>
+            <a href="https://go.hotmart.com/X107609255T?ap=6295" class="btn btn-primary" data-track="cta-principal">Garantir Meu Combo Agora</a>
+            <p class="microcopy">Seu pedido é processado imediatamente após a confirmação do pagamento</p>
+        </div>
+    </section>
+
+    <div class="mobile-cta-bar">
+        <a href="https://go.hotmart.com/X107609255T?ap=6295" class="btn btn-primary" data-track="cta-principal">Comprar Agora — R$ 720,48</a>
+    </div>
+
+</body>
+</html>
